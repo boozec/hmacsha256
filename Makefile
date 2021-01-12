@@ -19,7 +19,6 @@ EXECUTABLE := $(BIN_DIR)/hmacsha256
 clean: COUNT=$(words $(wildcard $(OBJ_DIR)/*.o))
 
 all: $(EXECUTABLE)
-all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS) $(MAIN)
 	@script -q -e -c '$(CXX) -I$(HEADER_DIR) -o $@ $(OBJECTS) $(MAIN)' $@.log > /dev/null; \
