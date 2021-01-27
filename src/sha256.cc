@@ -8,6 +8,7 @@ hmacsha256::SHA256::SHA256(const uint8_t* data, uint32_t length) {
 }
 
 void hmacsha256::SHA256::init(const uint8_t* data, uint32_t length) {
+    digest_ = new uint8_t[32];
     message_l_ = bit_len_ = 0;
     vars_[0] = 0x6a09e667;
     vars_[1] = 0xbb67ae85;
@@ -27,6 +28,10 @@ void hmacsha256::SHA256::init(const uint8_t* data, uint32_t length) {
             message_l_ = 0;
         }
     }
+}
+
+hmacsha256::SHA256::~SHA256() {
+    delete digest_;
 }
 
 hmacsha256::SHA256::SHA256(const std::string& data) {

@@ -18,6 +18,8 @@ public:
 
     SHA256(const std::string&);
 
+    ~SHA256();
+
     // get digest as array of bytes
     uint8_t* digest();
 
