@@ -3,6 +3,5 @@ project(hmacsha256)
 
 include_directories(include)
 
-file(GLOB SOURCES "src/*.cc")
-
-add_executable(hmacsha256 ${SOURCES})
+add_subdirectory(src)
+add_subdirectory(tests)
