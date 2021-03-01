@@ -9,37 +9,21 @@
 
 #include<cstdint>
 #include<array>
+#include "sha.h"
 
 namespace hmacsha256 {
-class SHA256 {
+class SHA256 : public SHA {
 public:
     // create a new SHA256 thanks an array of bytes
     SHA256(const uint8_t*, uint32_t);
 
     SHA256(const std::string&);
 
-    ~SHA256();
-
     // get digest as array of bytes
-    uint8_t* digest();
+    uint8_t* digest() override;
 
-    std::string hexdigest();
+    std::string hexdigest() override;
 private:
-    uint8_t* digest_;
-
-    // work variables: a, b, c, d, e, f, g, h
-    uint32_t vars_[8];
-
-    // data message, in bytes
-    // M,  "message to be hashed"
-    uint8_t message_[64];
-
-    // length L of the original message
-    uint32_t message_l_;
-
-    // lengh of bits
-    uint64_t bit_len_;
-
     // first 80 costansts 64bit words, paragraph 4.2.2
     std::array<uint32_t, 64> K = {
         0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,
@@ -61,7 +45,7 @@ private:
     };
 
     // the constructor
-    void init(const uint8_t* data, uint32_t length);
+    void init(const uint8_t* data, uint32_t length) override;
 
     // Ch(x, y, z) = (x | y) ^ (~x & z)
     static uint32_t ch(uint32_t, uint32_t, uint32_t);
@@ -90,10 +74,10 @@ private:
     static uint32_t sigma1(uint32_t);
 
     // padding
-    void pad();
+    void pad() override;
 
     // main function
-    void transform();
+    void transform() override;
 
     // transform bytes in big-endian, because SHA256 wants big endian ordering
     // Takes 1 parameter, the array of bytes that we want to reorder
