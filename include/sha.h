@@ -7,17 +7,19 @@
 #ifndef HMACSHA256_SHA_H_
 #define HMACSHA256_SHA_H_
 
-#include<cstdint>
-#include<array>
+#include <array>
+#include <cstdint>
 
 namespace hmacsha256 {
 class SHA {
 public:
-    SHA() {
+    SHA()
+    {
         digest_ = new uint8_t[32];
     }
 
-    ~SHA() {
+    ~SHA()
+    {
         delete digest_;
     }
 
@@ -25,6 +27,7 @@ public:
     virtual uint8_t* digest() = 0;
 
     virtual std::string hexdigest() = 0;
+
 protected:
     uint8_t* digest_;
 
@@ -50,7 +53,6 @@ protected:
     // main function
     virtual void transform() = 0;
 };
-
 
 } // namespace hmacsha256
 
